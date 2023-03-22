@@ -1,11 +1,6 @@
-import {FormEvent, useEffect, useState} from "react"
-import { api } from "../lib/axios"
+import {useEffect, useState} from "react"
 
-type listOfUsersProps = {
-    id: string
-    name: string
-    password: string
-}[]
+
 
 export function PasswordGenerator(){
 
@@ -20,9 +15,7 @@ export function PasswordGenerator(){
     const [numberState,setNumberState] = useState(true)
     const [symbolState,setSymbolState] = useState(true)
 
-    const [name,setName] = useState('')
-    const [password,setPassword] = useState('')
-    const [listOfUsers,setListOfUsers] = useState<listOfUsersProps>([])
+
 
     function passwordGenerator(){
         let allChars = ''
@@ -38,6 +31,7 @@ export function PasswordGenerator(){
             password += allChars.charAt(randomIndex)
         }
         setRandomPassword(password)
+        console.log(allChars)
     }
 
     useEffect(() => {
@@ -57,43 +51,11 @@ export function PasswordGenerator(){
         setSymbol(symbols);
       }, []);
 
-    async function signIn(event: FormEvent){
-        event.preventDefault()
-
-        await api.post('signIn',{
-          name,
-          password  
-        })
-        setName('')
-        setPassword('')
-    }
-
-    useEffect(() => {
-            api.get('users').then(response => {
-                setListOfUsers(response.data)
-                console.log(listOfUsers)
-            })
-    },[])
-
-    async function deleteUser(id: string) {
-        await api.delete(`userDelete/${id}`);
-        setListOfUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
-      }
-      
-      async function editUser(name: string, id?: string) {
-        await api.put(`editUser`, name);
-        setListOfUsers((prevUsers) =>
-          prevUsers.map((user) => (user.id === id ? { ...user } : user))
-        );
-      }
+    
 
     return (
         <>
-        <form onSubmit={signIn}>
-            <input value={name}  placeholder="name" type='text' onChange={(e) => setName(e.target.value)} />
-            <input value={password} placeholder="password" type='password'onChange={(e) => setPassword(e.target.value)}/>
-            <button type="submit">Sign up</button>
-        </form>
+        
             <input type='number' value={passwordLenght} onChange={(e) => setPasswordLenght(e.target.value)}/>
             <div>
                 <label>lowercase</label>
@@ -113,14 +75,7 @@ export function PasswordGenerator(){
             </div>
             <button onClick={passwordGenerator}>clique em mim</button>
             <p>{randomPassword}</p>
-            {listOfUsers.map((user) => {
-                return (<div key={user.id}>
-                    <p>{user.name}</p> 
-                    <button onClick={() => deleteUser(user.id)}>delete user</button>
-                    <button onClick={() => editUser(user.name)}>edit user</button>
-                </div>
-                )
-            })}
+            
         </>
     )
 }
