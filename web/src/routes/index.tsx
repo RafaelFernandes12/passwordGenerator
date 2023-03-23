@@ -1,9 +1,9 @@
 import { initializeApp } from "firebase/app";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { Home } from "../components/Home";
-import { Login } from "../components/Login";
-import { Register } from "../components/Register";
-import { RouteProtector } from "../components/RouteProtector";
+import { Home } from "../components/auth/Home";
+import { Login } from "../components/auth/Login";
+import { Register } from "../components/auth/Register";
+import { RouteProtector } from "../components/auth/RouteProtector";
 import { firebaseConfig } from "../firebase/config";
 
 initializeApp(firebaseConfig)

@@ -1,10 +1,9 @@
 import { RegisterForm } from "./RegisterForm"
-import {auth} from '../firebase/config'
-import {createUserWithEmailAndPassword } from "firebase/auth";
+import {auth} from '../../firebase/config'
+import {createUserWithEmailAndPassword, sendSignInLinkToEmail, signOut } from "firebase/auth";
 import { useState } from "react";
-import { ErrorText } from "../shared/ErrorText";
-
-
+import { ErrorText } from "../../shared/ErrorText";
+import { PasswordGenerator } from "./PasswordGenerator";
 
 export function Register(){
     const [email,setEmail] = useState('')
@@ -12,27 +11,34 @@ export function Register(){
     const [confirm,setConfirm] = useState('')
     const [error, setError] = useState('')
 
+
+
+    const actionCodeSettings = {
+        url: 'http://localhost:5173/Login',
+        handleCodeInApp: true,
+    };
+
+
+
+
     async function createUser(){
         setError('')
         if(password !== confirm) return setError('passwords doesnt match') 
 
             await createUserWithEmailAndPassword(auth,email,password)
+            .catch((e) => {
+                console.log(e)
+                setError('email or password invalid')
+            })
+            await signOut(auth)
+            await sendSignInLinkToEmail(auth, email,actionCodeSettings)
             .then(() => {
                 setError('An email has been sent to your account, please verify it to log in')
+                window.localStorage.setItem('emailForSignIn', email);
+                console.log('an email has been sent to your account')
             })
-            .catch(error => {
-                console.log(error);
-    
-                if(error.code.includes('auth/weak-password'))
-                {
-                    setError('A senha deve ter ao menos 6 caracteres')
-                }
-                else if('auth/invalid-email' || 'auth/email-already-exists'){
-                    setError('Insira um email valido')
-                }
-                else{
-                    setError('Impossivel se registrar, tente novamente mais tarde.')
-                }
+            .catch((e) => {
+                console.log(e)
             })    
     }
     return (
@@ -62,6 +68,8 @@ export function Register(){
                     value={confirm}
                     onChange={(e: any) => setConfirm(e.target.value)}
                 />
+                <p className="text-center">Unsure what password to use? try a random one.</p>
+                <PasswordGenerator />
                 <button className="bg-bgButton text-white p-2 mt-5 rounded"
                 onClick={createUser}
                 >
@@ -69,6 +77,7 @@ export function Register(){
                 </button>
                 <ErrorText error={error} />
             </div>
+
             <p>Already have an Acount? <a href='./Login' className="underline text-blue-600">Log In</a></p>
         </div>
     )

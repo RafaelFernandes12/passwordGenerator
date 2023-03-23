@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { auth } from "../firebase/config"
+import { auth } from "../../firebase/config"
 
 export function userState(){
     const navigate = useNavigate()
@@ -14,7 +14,6 @@ export function userState(){
         }
         else{ 
             console.log('no user here')
-            navigate('/login')
         }
         setLoading(false)
         })

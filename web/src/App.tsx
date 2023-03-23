@@ -1,5 +1,5 @@
 import { AppRoutes } from "./routes";
-import { userState } from "./components/userState";
+import { userState } from "./components/auth/userState";
 import './styles/global.css';
 
 export function App() {
