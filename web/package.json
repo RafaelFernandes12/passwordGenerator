@@ -16,11 +16,16 @@
     "@radix-ui/react-dialog": "^1.0.3",
     "@radix-ui/react-slider": "^1.1.1",
     "axios": "^1.3.4",
-    "firebase": "^9.18.0",
+    "crypto-api": "^0.8.5",
+    "firebase": "^9.17.1",
+    "nanoid": "^4.0.1",
     "node": "^19.6.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.9.0"
+    "react-icons": "^4.8.0",
+    "react-id-generator": "^3.0.2",
+    "react-router-dom": "^6.9.0",
+    "v4": "^0.0.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",

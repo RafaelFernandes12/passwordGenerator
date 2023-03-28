@@ -18,20 +18,21 @@ export function Login(){
     
     
     function logInWithEmailAndPassword(){
-        // if (isSignInWithEmailLink(auth, window.location.href)) {
-        //     let email = window.localStorage.getItem('emailForSignIn');
-        //     console.log('estive aqui')
-        //     if (!email) {
-        //         email = window.prompt('Please provide your email for confirmation');
-        //     }
-        //     signInWithEmailLink(auth, email!, window.location.href)
-        //         .then((result) => {
-        //             console.log(result)
-        //             window.localStorage.removeItem('emailForSignIn');
-        //         })
-        //         .catch((e) => {
-        //             console.log(e)
-        //         });
+        // try{
+            // if (isSignInWithEmailLink(auth, window.location.href)){
+            //     let email = window.localStorage.getItem('emailForSignIn');
+            //     console.log('estive aqui')
+            //     if (!email) {
+            //         email = window.prompt('Please provide your email for confirmation');
+            //     }
+            //     signInWithEmailLink(auth, email!, window.location.href)
+            //         .then((result) => {
+            //             console.log(result)
+            //             window.localStorage.removeItem('emailForSignIn');
+            //             navigate('/Home')
+            //         })
+            //     }
+        // }
          signInWithEmailAndPassword(auth,email,password)
             .then(() => {
                 console.log('user is in')
@@ -41,6 +42,9 @@ export function Login(){
                 console.log(e)
                 setError('password or email incorrect')
             })
+        // catch(e){
+        //     console.log(e)
+        // }
         }
     function logInWithGoogle(){
         auth.useDeviceLanguage()

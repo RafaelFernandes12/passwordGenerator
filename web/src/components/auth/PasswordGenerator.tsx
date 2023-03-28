@@ -1,6 +1,5 @@
 import {useEffect, useState} from "react"
 import * as Dialog from '@radix-ui/react-dialog'
-import * as Slider from '@radix-ui/react-slider';
 import ShuffleIcon from '@mui/icons-material/Shuffle';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
@@ -108,7 +107,7 @@ export function PasswordGenerator(){
     return (
         <div className="text-center m-2">
             <Dialog.Root>
-                <Dialog.Trigger type="button" className="p-2 bg-blue-900">
+                <Dialog.Trigger type="button" className="p-2 bg-blue-900 rounded-lg">
                     <ShuffleIcon className="text-white text-center"/>
                 </Dialog.Trigger>
                 <Dialog.Portal>

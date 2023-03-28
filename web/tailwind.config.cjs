@@ -7,8 +7,13 @@ module.exports = {
   theme: {
     extend: {
       colors:{
-        bgButton: '#4411EB'
+        bgButton: '#4411EB',
+        menuBorder: '#262626'
+      },
+      height:{
+        'postH': '40rem'
       }
+      
     },
   },
   plugins: [],
